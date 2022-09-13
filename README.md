@@ -1,2 +1,2 @@
-# Intrution_Detection_App
+# Network_Intrution_Detection_App
 Digi+ Homework
