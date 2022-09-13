@@ -34,7 +34,7 @@ else:
 
 
 
-
+uncode_df=dfx
 
 
 model = load_model('my_kdd_model.h5')
@@ -176,3 +176,29 @@ for i in range(10):
        st.write(ts, 'Your Network Behavor Normal Now........')
     else:
        st.write(ts,'Act Now!!! Your network is under ',labels[indx],' ATTACK!')
+       st.error('Warning::Your Network is under ATTACK!')
+       
+       
+df=uncode_df
+
+# Look at the numerical data
+
+fig, axs = plt.subplots(2, 2)
+axs[0, 0].plot(df['src_bytes'].head(500))
+axs[0, 0].set_title('F5: scr_bytes')
+axs[0, 1].plot(df['dst_bytes'].head(500))
+axs[0, 1].set_title('F6: dst_bytes')
+axs[1, 0].plot(df['dst_host_count'].head(500))
+axs[1, 0].set_title('F31: dst_host_count')
+axs[1, 1].plot(df['dst_host_same_src_port_rate'].head(500))
+axs[1, 1].set_title('F36: dst_host_same_src_port_rat')
+for ax in axs.flat:
+    ax.set(xlabel='Time(Minutes)', ylabel='Enterprise Network Log')
+
+# Hide x labels and tick labels for top plots and y ticks for right plots.
+for ax in axs.flat:
+    ax.label_outer()
+  
+fig.suptitle('Data Samples from Network Traffic Profile: Numerical Features')
+#plt.show()
+st.write(fig)              
