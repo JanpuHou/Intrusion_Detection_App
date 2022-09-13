@@ -41,7 +41,7 @@ model = load_model('my_kdd_model.h5')
 
 
 def encode_network_data(dfx):
-    df = pd.read_csv(r'kddcup_10_data.csv', header=None)
+    df = pd.read_csv(r'kddcup_data.csv', header=None)
     df.columns = [
     'duration',
     'protocol_type',
