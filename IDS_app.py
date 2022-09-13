@@ -24,15 +24,20 @@ image = Image.open('app_ids.jpg')
 st.image(image,"Upload a Network Triffic Profile for Intrusion Detection" )
 
 
-uploaded_file = st.file_uploader("Choose a Network Traffic Profile file ...", type="csv")
+option = st.selectbox(
+     'Which Network Traffic Profile You Likt to Monitor?',
+     ('Normal','Network_Customer_Serivice', 'Network_Factory_A', 'Network_Remote_Site_B', 'Go to Browse files'))
+st.write('You selected:', option)
+ 
 
+uploaded_file = st.file_uploader("Choose a Network Traffic Profile file ...", type="csv") 
+ 
 if uploaded_file is None:
     dfx = pd.read_csv(r'normal_data.csv', header=None)
 else:
     dfx = pd.read_csv(uploaded_file)
     st.write(dfx)
-
-
+      
 
 uncode_df=dfx
 
@@ -168,7 +173,7 @@ x = dfx[x_columns].values
 labels=['back.' ,'buffer_overflow.' ,'ftp_write.', 'guess_passwd.', 'imap.','ipsweep.' ,'land.', 'loadmodule.', 'multihop.' ,'neptune.', 'nmap.' ,'normal.','perl.' ,'phf.' ,'pod.', 'portsweep.', 'rootkit.', 'satan.', 'smurf.', 'spy.','teardrop.' ,'warezclient.', 'warezmaster.']         
 pred = model.predict(x)
 
-for i in range(10):
+for i in range(5):
     my_list=pred[i].tolist()
     indx=my_list.index(max(my_list))
     ts=(dt.datetime.now())
